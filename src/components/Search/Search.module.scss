@@ -1,0 +1,19 @@
+@import '../src/Helpers.module.scss';
+
+.Search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    & > button {
+      background-color: green;
+      color: white;
+      margin-top: 5px;
+    }
+  }
+}
