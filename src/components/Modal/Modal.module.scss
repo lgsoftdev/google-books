@@ -1,13 +1,24 @@
+@import '../src/UtilsStyles.module.scss';
+
 .Modal {
-  width: 65%;
-  height: auto;
   background-color: lightgrey;
   padding: 5px 20px 20px 20px;
-  position: fixed;
-  top: 18%;
-  left: 16%;
-  z-index: 10;
 
-  border-radius: 10px;
+  border-radius: 20px;
   border: 1px solid grey;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -300px;
+  width: 600px;
+  height: 400px;
+
+  @media only screen and (max-width: $media_max_width) {
+    margin-top: -220px;
+    margin-left: -170px;
+    width: 300px;
+    height: 500px;
+  }
 }

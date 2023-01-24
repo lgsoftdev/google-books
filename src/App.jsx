@@ -11,12 +11,15 @@ const App = () => {
 
   const handleSearch = async (searchString) => {
     const books = await fetchData(
-      'https://www.googleapis.com/books/v1/volumes',
-      `q=${searchString}+intitle:${searchString}`
+      `https://www.googleapis.com/books/v1/volumes?q=${searchString}+intitle:${searchString}`
     );
     setSearchResult(
       books.totalItems > 0
-        ? books.items.map((element) => element.volumeInfo)
+        ? books.items.map((element) => {
+            const item = { ...element.volumeInfo };
+            item.id = element.id;
+            return item;
+          })
         : []
     );
   };
@@ -25,10 +28,7 @@ const App = () => {
     <main className={styles.App}>
       <section className={styles.App__section}>
         <h2>Google Books</h2>
-        <Search
-          onSearch={handleSearch}
-          placeholder="Enter title search string"
-        />
+        <Search onSearch={handleSearch} placeholder="Search books by title" />
       </section>
       {sortedResult !== undefined && <Books booksList={sortedResult} />}
     </main>

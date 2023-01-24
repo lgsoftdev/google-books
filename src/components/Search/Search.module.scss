@@ -5,15 +5,22 @@
   flex-direction: column;
   justify-content: center;
 
+  & > input {
+    font: inherit;
+  }
+
   & > div {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 
     & > button {
+      font: inherit;
       background-color: green;
       color: white;
       margin-top: 5px;
+      width: 100px;
+      border: 2px solid darkgreen;
     }
   }
 }

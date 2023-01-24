@@ -1,8 +1,5 @@
-export const fetchData = async (url, queryString) => {
-  let inputUrl = url;
-  if (queryString.length > 0) inputUrl = inputUrl.concat('?', queryString);
-
-  const response = await fetch(inputUrl, {
+export const fetchData = async (url) => {
+  const response = await fetch(url, {
     headers: {
       Accept: 'application/json',
     },
@@ -14,9 +11,11 @@ export const cleanBookDetails = (volumeInfoDetails) => {
   const cleanDetails = { ...volumeInfoDetails };
 
   if (!cleanDetails.imageLinks)
-    cleanDetails.imageLinks.smallThumbnail = '../src/assets/transparent.png';
+    cleanDetails.imageLinks = {
+      smallThumbnail: '../src/assets/transparent.png',
+    };
 
-  if (!cleanDetails.authors) cleanDetails.authors = '?';
+  if (!cleanDetails.authors) cleanDetails.authors = 'Author Unknown';
 
   return cleanDetails;
 };
