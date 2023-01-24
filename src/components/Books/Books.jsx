@@ -20,7 +20,6 @@ const Books = ({ booksList }) => {
     <section className={styles.Books}>
       {booksList.length > 0 &&
         booksList.map((item, index) => {
-          console.log(item);
           return <Book key={index} details={item} onOpen={handleOpenClick} />;
         })}
 
