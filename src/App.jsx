@@ -2,13 +2,18 @@ import styles from './App.module.scss';
 import Search from './components/Search/Search';
 import Books from './components/Books/Books';
 import { useState } from 'react';
-import Modal from './components/Modal/Modal';
+import { fetchData } from './UtilsScripts';
+//import Modal from './components/Modal/Modal';
 
 const App = () => {
   const [searchResult, setSearchResult] = useState(undefined);
 
-  const handleSearch = (booksArray) => {
-    setSearchResult(booksArray);
+  const handleSearch = async (searchString) => {
+    const books = await fetchData(
+      'https://www.googleapis.com/books/v1/volumes',
+      `q=${searchString}`
+    );
+    setSearchResult(books.items);
   };
 
   return (

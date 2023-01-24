@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { fetchData } from '../../Helpers';
 import styles from './Search.module.scss';
 
 const Search = ({ onSearch }) => {
@@ -9,13 +8,9 @@ const Search = ({ onSearch }) => {
     setSearchString(event.target.value);
   };
 
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
-    const data = await fetchData(
-      'https://www.googleapis.com/books/v1/volumes',
-      `q=${searchString}`
-    );
-    onSearch(data.items);
+    onSearch(searchString);
   };
 
   return (
