@@ -2,27 +2,35 @@ import styles from './App.module.scss';
 import Search from './components/Search/Search';
 import Books from './components/Books/Books';
 import { useState } from 'react';
-import { fetchData } from './UtilsScripts';
+import { fetchData, sortAscending } from './UtilsScripts';
 //import Modal from './components/Modal/Modal';
 
 const App = () => {
   const [searchResult, setSearchResult] = useState(undefined);
+  const sortedResult = sortAscending(searchResult, 'title');
 
   const handleSearch = async (searchString) => {
     const books = await fetchData(
       'https://www.googleapis.com/books/v1/volumes',
-      `q=${searchString}`
+      `q=${searchString}+intitle:${searchString}`
     );
-    setSearchResult(books.items);
+    setSearchResult(
+      books.totalItems > 0
+        ? books.items.map((element) => element.volumeInfo)
+        : []
+    );
   };
 
   return (
     <main className={styles.App}>
       <section className={styles.App__section}>
         <h2>Google Books</h2>
-        <Search onSearch={handleSearch} />
+        <Search
+          onSearch={handleSearch}
+          placeholder="Enter title search string"
+        />
       </section>
-      {searchResult !== undefined && <Books booksList={searchResult} />}
+      {sortedResult !== undefined && <Books booksList={sortedResult} />}
     </main>
   );
 };

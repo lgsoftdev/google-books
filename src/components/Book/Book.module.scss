@@ -1,24 +1,33 @@
 @import '../src/UtilsStyles.module.scss';
 
 .Book {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  width: 90%;
+  height: 200px;
   background-color: white;
   margin: 20px 20px 0 20px;
   padding: 20px 20px 20px 0;
-  max-height: 200px;
   border-radius: 20px;
   overflow: hidden;
-  position: relative;
-  top: 0;
   z-index: 9;
 
   @media only screen and (max-width: $media_max_width) {
+    display: flex;
     flex-direction: column;
+    width: 80%;
     margin: 5px 10px 20px 10px;
-    padding: 20px;
-    max-height: 400px;
+    padding: 0 20px 20px 20px;
+    height: 300px;
     align-items: center;
+
+    & > figure > img {
+      max-height: 100px;
+    }
+
+    & > div > h3 {
+      font-size: medium;
+    }
   }
 }
 
@@ -26,5 +35,16 @@ a {
   color: blue;
   &:hover {
     color: red;
+  }
+}
+
+.truncate_overflow {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  @media only screen and (max-width: $media_max_width) {
+    -webkit-line-clamp: 3;
   }
 }

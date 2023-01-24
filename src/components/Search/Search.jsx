@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './Search.module.scss';
 
-const Search = ({ onSearch }) => {
+const Search = ({ onSearch, placeholder }) => {
   const [searchString, setSearchString] = useState('');
 
   const handleSearchStringChange = (event) => {
@@ -19,7 +19,7 @@ const Search = ({ onSearch }) => {
         type="text"
         value={searchString}
         onChange={handleSearchStringChange}
-        placeholder="Enter search string"
+        placeholder={placeholder}
         required
       />
       <div>

@@ -24,7 +24,7 @@ const Books = ({ booksList }) => {
           return (
             <Book
               key={index}
-              volumeInfo={cleanBookDetails(item.volumeInfo)}
+              volumeInfo={cleanBookDetails(item)}
               onOpen={handleOpenClick}
             />
           );

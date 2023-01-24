@@ -13,7 +13,11 @@ const Book = ({ volumeInfo, onOpen }) => {
         </figure>
         <div>
           <h3>
-            <a onClick={handleOpenClick} href="#">
+            <a
+              className={styles.truncate_overflow}
+              onClick={handleOpenClick}
+              href="#"
+            >
               {volumeInfo.title}
             </a>
           </h3>
