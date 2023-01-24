@@ -9,3 +9,14 @@ export const fetchData = async (url, queryString) => {
   });
   return await response.json();
 };
+
+export const cleanBookDetails = (volumeInfoDetails) => {
+  const cleanDetails = { ...volumeInfoDetails };
+
+  if (!cleanDetails.imageLinks)
+    cleanDetails.imageLinks.smallThumbnail = '../src/assets/transparent.png';
+
+  if (!cleanDetails.authors) cleanDetails.authors = '?';
+
+  return cleanDetails;
+};

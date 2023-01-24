@@ -2,6 +2,7 @@ import Book from '../Book/Book';
 import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import styles from './Books.module.scss';
+import { cleanBookDetails } from '../../UtilsScripts';
 
 const Books = ({ booksList }) => {
   const [show, setShow] = useState(false);
@@ -20,7 +21,13 @@ const Books = ({ booksList }) => {
     <section className={styles.Books}>
       {booksList.length > 0 &&
         booksList.map((item, index) => {
-          return <Book key={index} details={item} onOpen={handleOpenClick} />;
+          return (
+            <Book
+              key={index}
+              volumeInfo={cleanBookDetails(item.volumeInfo)}
+              onOpen={handleOpenClick}
+            />
+          );
         })}
 
       {booksList.length === 0 && <label>No results found.</label>}
