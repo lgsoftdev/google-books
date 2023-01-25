@@ -9,10 +9,11 @@
     width: 90vw;
   }
 
-  &__section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  &__section_row {
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: space-between;
+    @include displayFlex(row, space-between);
     margin: 0 20px 0 20px;
     padding-top: 10px;
 
@@ -22,6 +23,35 @@
 
     & h2 {
       color: white;
+      font-family: 'Courgette', sans-serif;
+      font-size: xx-large;
+      text-align: center;
+
+      //SOURCE: https://codepen.io/hankh/pen/XdmWOz
+      display: inline;
+      background-image: linear-gradient(to right, firebrick, $color_highlight);
+      background-size: 100% 15%;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+    }
+  }
+
+  &__section_row2 {
+    @include displayFlex(row, space-evenly, center);
+    margin: 0 20px 0 20px;
+    color: white;
+  }
+
+  &__section_col {
+    @include displayFlex(column, center, center);
+    height: 20vh;
+    font-size: xx-large;
+    background-color: white;
+    margin-top: 20px;
+    padding: 20px;
+
+    @media only screen and (max-width: $media_max_width) {
+      font-size: x-large;
     }
   }
 }

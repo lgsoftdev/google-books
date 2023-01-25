@@ -1,13 +1,14 @@
 import styles from './Book.module.scss';
 import Modal from '../Modal/Modal';
 import ReactDOM from 'react-dom/client';
+import { useState } from 'react';
 
 const Book = ({ volumeInfo }) => {
   const handleOpenClick = (event) => {
     event.preventDefault();
-    ReactDOM.createRoot(document.getElementById(volumeInfo.id)).render(
-      <Modal />
-    );
+
+    const root = ReactDOM.createRoot(document.getElementById(volumeInfo.id));
+    root.render(<Modal volumeInfo={volumeInfo} />);
   };
 
   try {

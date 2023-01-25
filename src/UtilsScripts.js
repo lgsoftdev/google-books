@@ -15,7 +15,13 @@ export const cleanBookDetails = (volumeInfoDetails) => {
       smallThumbnail: '../src/assets/transparent.png',
     };
 
-  if (!cleanDetails.authors) cleanDetails.authors = 'Author Unknown';
+  !cleanDetails.authors
+    ? (cleanDetails.authors = 'Author Unknown')
+    : (cleanDetails.authors = cleanDetails.authors.join(', '));
+
+  !cleanDetails.categories
+    ? (cleanDetails.categories = 'Unknown')
+    : (cleanDetails.categories = cleanDetails.categories.join(', '));
 
   return cleanDetails;
 };
@@ -38,4 +44,29 @@ export const sortAscending = (object, sortBy) => {
   });
 
   return sorted;
+};
+
+export const getFormattedDate = (date) => {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  const dateObj = new Date(date);
+
+  if (!dateObj.getDate()) return 'Unknown';
+
+  return `${dateObj.getDate()} ${
+    months[dateObj.getMonth()]
+  } ${dateObj.getFullYear()}`;
 };

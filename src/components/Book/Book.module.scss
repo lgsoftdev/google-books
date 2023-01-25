@@ -10,6 +10,7 @@
   padding: 20px 20px 20px 0;
   border-radius: 20px;
   overflow: hidden;
+  box-shadow: 5px 4px 4px #b7b78a;
 
   & > figure > a > img {
     max-height: 150px;
@@ -40,9 +41,9 @@
 }
 
 a {
-  color: blue;
+  color: black;
   &:hover {
-    color: red;
+    color: $color_highlight;
   }
 }
 

@@ -1,1 +1,18 @@
 $media_max_width: 600px;
+
+$color_search: #a7c957;
+$color_highlight: darkorange;
+
+@mixin displayFlex($direction, $justify, $align_items: '') {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  @if ($align_items != '') {
+    align-items: $align_items;
+  }
+}
+
+@mixin displayGrid($columns) {
+  display: grid;
+  grid-template-columns: $columns;
+}

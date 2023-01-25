@@ -4,21 +4,37 @@
   background-color: lightgrey;
   padding: 5px 20px 20px 20px;
 
-  border-radius: 20px;
   border: 1px solid grey;
 
   position: fixed;
   top: 50%;
   left: 50%;
-  margin-top: -200px;
+  margin-top: -300px;
   margin-left: -300px;
   width: 600px;
-  height: 400px;
+  max-height: 600px;
+  overflow: auto;
 
   @media only screen and (max-width: $media_max_width) {
     margin-top: -220px;
     margin-left: -170px;
     width: 300px;
     height: 500px;
+  }
+
+  &__header {
+    @include displayFlex(row, space-between);
+  }
+}
+
+.grid_col2 {
+  @include displayGrid(2fr 1fr);
+
+  @media only screen and (max-width: $media_max_width) {
+    @include displayGrid(1fr auto);
+
+    & img {
+      margin-left: 5px;
+    }
   }
 }
