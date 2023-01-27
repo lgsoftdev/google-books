@@ -37,8 +37,8 @@
   }
 
   &__section_row2 {
-    @include displayFlex(row, space-evenly, center);
-    margin: 0 20px 0 20px;
+    @include displayFlex(row, space-between, center);
+    margin: 0 100px 0 100px;
     color: white;
   }
 

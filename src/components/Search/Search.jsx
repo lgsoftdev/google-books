@@ -1,26 +1,22 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import styles from './Search.module.scss';
 
 const Search = ({ onSearch, placeholder }) => {
-  const [searchString, setSearchString] = useState('');
-
-  const handleSearchStringChange = (event) => {
-    setSearchString(event.target.value);
-  };
+  const searchString = useRef('');
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    onSearch(searchString);
+    onSearch(searchString.current.value);
+    searchString.current.value = '';
   };
 
   return (
     <form className={styles.Search} onSubmit={handleFormSubmit}>
       <input
         type="text"
-        value={searchString}
-        onChange={handleSearchStringChange}
         placeholder={placeholder}
         required
+        ref={searchString}
       />
       <div>
         <button type="submit">Search</button>

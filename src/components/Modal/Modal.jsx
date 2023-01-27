@@ -33,8 +33,6 @@ const Modal = ({ volumeInfo }) => {
   const modalRef = useRef(null);
   useOutsideAlerter(modalRef);
 
-  console.log(volumeInfo);
-
   return (
     <section className={styles.Modal} ref={modalRef}>
       <header className={styles.Modal__header}>

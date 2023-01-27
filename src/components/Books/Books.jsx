@@ -1,14 +1,20 @@
 import Book from '../Book/Book';
-//import Modal from '../Modal/Modal';
-//import { useState, useEffect, useRef } from 'react';
 import styles from './Books.module.scss';
 import { cleanBookDetails } from '../../UtilsScripts';
 
-const Books = ({ booksList }) => {
+const Books = ({ booksList, pageNumber }) => {
+  const itemsPerPage = 10;
+  const upperLimit = pageNumber * itemsPerPage;
+  let booksListCopy;
+
+  if (booksList.length > 0) {
+    booksListCopy = booksList.slice(upperLimit - itemsPerPage, upperLimit);
+  }
+
   return (
     <section className={styles.Books}>
       {booksList.length > 0 &&
-        booksList.map((item, index) => {
+        booksListCopy.map((item, index) => {
           return <Book key={index} volumeInfo={cleanBookDetails(item)} />;
         })}
 
