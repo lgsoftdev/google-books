@@ -6,14 +6,14 @@ import { getFormattedDate } from '../../UtilsScripts';
 /**
  * Hook that alerts clicks outside of the passed ref
  */
-const useOutsideAlerter = (ref) => {
+const useOutsideAlerter = (ref, onModalClose) => {
   useEffect(() => {
     /**
      * Alert if clicked on outside of element
      */
     const handleClickOutside = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
-        ref.current.remove();
+        onModalClose();
       }
     };
     // Bind the event listener
@@ -25,20 +25,22 @@ const useOutsideAlerter = (ref) => {
   }, [ref]);
 };
 
-const Modal = ({ volumeInfo }) => {
-  const handleCloseClick = () => {
-    modalRef.current.remove();
+const Modal = ({ details, onModalClose }) => {
+  const modalRef = useRef(undefined);
+
+  const handleCloseClick = (event) => {
+    event.preventDefault();
+    onModalClose();
   };
 
-  const modalRef = useRef(null);
-  useOutsideAlerter(modalRef);
+  useOutsideAlerter(modalRef, onModalClose);
 
   return (
     <section className={styles.Modal} ref={modalRef}>
       <header className={styles.Modal__header}>
         <div>
-          <h3>{volumeInfo.title}</h3>
-          <h4>{volumeInfo.subtitle}</h4>
+          <h3>{details.title}</h3>
+          <h4>{details.subtitle}</h4>
         </div>
 
         <a onClick={handleCloseClick} href="#">
@@ -47,19 +49,16 @@ const Modal = ({ volumeInfo }) => {
       </header>
       <div className={styles.grid_col2}>
         <section>
-          <p>by {volumeInfo.authors}</p>
-          <p>Publisher:{volumeInfo.publisher}</p>
-          <p>Published Date: {getFormattedDate(volumeInfo.publishedDate)}</p>
-          <p>Categories: {volumeInfo.categories}</p>
+          <p>by {details.authors}</p>
+          <p>Publisher: {details.publisher}</p>
+          <p>Published Date: {getFormattedDate(details.publishedDate)}</p>
+          <p>Categories: {details.categories}</p>
         </section>
         <section>
-          <img src={volumeInfo.imageLinks.smallThumbnail} />
+          <img src={details.imageLinks.smallThumbnail} />
         </section>
       </div>
-      <div>
-        <p>{volumeInfo.description}</p>
-        <aside></aside>
-      </div>
+      <p>{details.description}</p>
     </section>
   );
 };

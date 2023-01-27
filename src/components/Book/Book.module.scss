@@ -5,16 +5,16 @@
   grid-template-columns: 200px 1fr;
   width: 90%;
   height: 200px;
-  background-color: white;
-  margin: 20px 20px 0 20px;
-  padding: 20px 20px 20px 0;
-  border-radius: 20px;
+  background-color: $color_light;
+  margin: $px_medium $px_medium 0 $px_medium;
+  padding: $px_medium $px_medium $px_medium 0;
+  border-radius: $px_medium;
   overflow: hidden;
-  box-shadow: 5px 4px 4px #b7b78a;
+  box-shadow: 4px 2px 2px $color_shadow;
 
   & > figure > a > img {
     max-height: 150px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px $color_shadow;
   }
 
   & > figure > a:hover > img {
@@ -22,16 +22,15 @@
   }
 
   @media only screen and (max-width: $media_max_width) {
-    display: flex;
-    flex-direction: column;
+    @include displayFlex(column, flex-start);
     width: 75%;
-    margin: 5px 10px 20px 10px;
-    padding: 0 20px 20px 20px;
-    height: 300px;
+    margin: $px_xsmall $px_small $px_medium $px_small;
+    padding: 0 $px_medium $px_medium $px_medium;
+    height: 360px;
     align-items: center;
 
     & > figure > img {
-      max-height: 100px;
+      max-height: $px_xxlarge;
     }
 
     & > div > h3 {

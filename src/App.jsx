@@ -1,12 +1,14 @@
 import styles from './App.module.scss';
+import Heading from './components/Heading/Heading';
 import Search from './components/Search/Search';
 import Books from './components/Books/Books';
-import { useState, useRef } from 'react';
-import { fetchData, sortAscending } from './UtilsScripts';
 import Paginate from './components/Paginate/Paginate';
+import { useState, useRef, useEffect } from 'react';
+import { fetchData, sortAscending, ITEMS_PER_PAGE } from './UtilsScripts';
 
 const App = () => {
   const searchString = useRef('');
+  const loader = useRef(undefined);
   const [sortedResult, setSortedResult] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -32,20 +34,28 @@ const App = () => {
   };
 
   const handleSearch = (stringToSearch) => {
+    loader.current.className = styles.loader;
     searchString.current = stringToSearch;
     getBooks();
   };
 
   const goToPage = (page) => {
+    loader.current.className = styles.loader;
     setPageNumber(page);
   };
+
+  useEffect(() => {
+    loader.current.className = '';
+  });
 
   return (
     <main className={styles.App}>
       <header className={styles.App__section_row}>
-        <h2>Book Hunt</h2>
+        <Heading title="Book Hunt" />
         <Search onSearch={handleSearch} placeholder="Search books by title" />
       </header>
+
+      <section ref={loader}></section>
 
       {sortedResult === undefined ? (
         <section className={styles.App__section_col}>
@@ -56,12 +66,13 @@ const App = () => {
           <section className={styles.App__section_row2}>
             <p>Search result for '{searchString.current}'.</p>
             <Paginate
-              booksList={sortedResult}
+              itemsList={sortedResult}
+              itemsPerPage={ITEMS_PER_PAGE}
+              currentPage={pageNumber}
               onPageChange={goToPage}
-              pageNumber={pageNumber}
             />
           </section>
-          <Books booksList={sortedResult} pageNumber={pageNumber} />
+          <Books booksList={sortedResult} currentPage={pageNumber} />
         </section>
       )}
     </main>

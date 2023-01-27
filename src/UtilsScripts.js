@@ -1,29 +1,61 @@
+export const ITEMS_PER_PAGE = 10;
+const TITLE_UNKNOWN = 'ZZZ';
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 export const fetchData = async (url) => {
-  const response = await fetch(url, {
-    headers: {
-      Accept: 'application/json',
-    },
-  });
-  return await response.json();
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    return await response.json();
+  } catch (error) {
+    console.log('Error fetchData', error.message);
+  }
 };
 
 export const cleanBookDetails = (volumeInfoDetails) => {
   const cleanDetails = { ...volumeInfoDetails };
 
-  if (!cleanDetails.imageLinks)
-    cleanDetails.imageLinks = {
-      smallThumbnail: '../src/assets/transparent.png',
-    };
+  try {
+    if (!cleanDetails.imageLinks)
+      cleanDetails.imageLinks = {
+        smallThumbnail: '../src/assets/transparent.png',
+      };
 
-  !cleanDetails.authors
-    ? (cleanDetails.authors = 'Author Unknown')
-    : (cleanDetails.authors = cleanDetails.authors.join(', '));
+    !cleanDetails.authors
+      ? (cleanDetails.authors = 'Author Unknown')
+      : (cleanDetails.authors = cleanDetails.authors.join(', '));
 
-  !cleanDetails.categories
-    ? (cleanDetails.categories = 'Unknown')
-    : (cleanDetails.categories = cleanDetails.categories.join(', '));
+    !cleanDetails.categories
+      ? (cleanDetails.categories = 'Unknown')
+      : (cleanDetails.categories = cleanDetails.categories.join(', '));
 
-  return cleanDetails;
+    !cleanDetails.description
+      ? (cleanDetails.description = '')
+      : (cleanDetails.description = cleanDetails.description.replaceAll(
+          '�',
+          "'"
+        ));
+  } catch (error) {
+    console.log('Error cleanBookDetails', error.message);
+  } finally {
+    return cleanDetails;
+  }
 };
 
 //SOURCE https://www.scaler.com/topics/javascript-sort-an-array-of-objects/
@@ -32,41 +64,33 @@ export const sortAscending = (object, sortBy) => {
 
   const sorted = [...object];
   sorted.sort((a, b) => {
-    const nameA = a[sortBy].toUpperCase(); // ignore upper and lowercase
-    const nameB = b[sortBy].toUpperCase(); // ignore upper and lowercase
-    if (nameA < nameB) {
-      return -1;
+    try {
+      const nameA = !a[sortBy] ? TITLE_UNKNOWN : a[sortBy].toUpperCase(); // ignore upper and lowercase
+      const nameB = !b[sortBy] ? TITLE_UNKNOWN : b[sortBy].toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    } catch (error) {
+      console.log('Error sortAscending', a, b, error.message);
     }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
   });
 
   return sorted;
 };
 
 export const getFormattedDate = (date) => {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
   const dateObj = new Date(date);
+  try {
+    if (!dateObj.getDate()) return 'Unknown';
 
-  if (!dateObj.getDate()) return 'Unknown';
-
-  return `${dateObj.getDate()} ${
-    months[dateObj.getMonth()]
-  } ${dateObj.getFullYear()}`;
+    return `${dateObj.getDate()} ${
+      MONTHS[dateObj.getMonth()]
+    } ${dateObj.getFullYear()}`;
+  } catch (error) {
+    return 'Error retrieving date';
+  }
 };

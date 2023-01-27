@@ -1,10 +1,11 @@
 @import '../src/UtilsStyles.module.scss';
 
 .Modal {
-  background-color: lightgrey;
-  padding: 5px 20px 20px 20px;
+  background-color: #f4ead5;
+  padding: $px_xsmall $px_medium $px_medium $px_medium;
 
   border: 1px solid grey;
+  box-shadow: 5px 4px 4px rgba(0, 0, 0, 0.5);
 
   position: fixed;
   top: 50%;
@@ -20,6 +21,13 @@
     margin-left: -170px;
     width: 300px;
     height: 500px;
+  }
+
+  @media only screen and (max-width: $media_max_width_smaller) {
+    margin-top: -220px;
+    margin-left: -130px;
+    width: 220px;
+    height: 450px;
   }
 
   &__header {

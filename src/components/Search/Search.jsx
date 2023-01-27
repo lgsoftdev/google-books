@@ -8,6 +8,7 @@ const Search = ({ onSearch, placeholder }) => {
     event.preventDefault();
     onSearch(searchString.current.value);
     searchString.current.value = '';
+    searchString.current.focus();
   };
 
   return (

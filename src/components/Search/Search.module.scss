@@ -1,9 +1,6 @@
 @import '../src/UtilsStyles.module.scss';
 
 .Search {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
   @include displayFlex(column, center);
 
   & > input {
@@ -16,20 +13,22 @@
       width: auto;
       height: auto;
     }
+
+    @media only screen and (max-width: $media_max_width_smaller) {
+      width: 110px;
+      height: auto;
+    }
   }
 
   & > div {
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: flex-end;
     @include displayFlex(row, flex-end);
 
     & > button {
       font: inherit;
       height: 30px;
-      margin-top: 10px;
-      width: 100px;
-      border-radius: 50px;
+      margin-top: $px_small;
+      width: $px_xxlarge;
+      border-radius: $px_large;
       border: none;
       background: $color_search;
       position: relative;

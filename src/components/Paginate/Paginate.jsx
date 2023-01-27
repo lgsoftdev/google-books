@@ -1,9 +1,8 @@
 import styles from './Paginate.module.scss';
 
-const Paginate = ({ booksList, onPageChange, pageNumber }) => {
-  const itemsPerPage = 10;
-  const remainder = booksList.length % itemsPerPage > 0 ? 1 : 0;
-  const numberOfPages = parseInt(booksList.length / itemsPerPage) + remainder;
+const Paginate = ({ itemsList, itemsPerPage, currentPage, onPageChange }) => {
+  const remainder = itemsList.length % itemsPerPage > 0 ? 1 : 0;
+  const numberOfPages = parseInt(itemsList.length / itemsPerPage) + remainder;
   const pagesArray = new Array(numberOfPages).fill(0);
 
   const handlePageChange = (event) => {
@@ -15,7 +14,7 @@ const Paginate = ({ booksList, onPageChange, pageNumber }) => {
       {numberOfPages >= 1 && (
         <div className={styles.Paginate}>
           <label>Page</label>
-          <select value={pageNumber} onChange={handlePageChange}>
+          <select value={currentPage} onChange={handlePageChange}>
             {pagesArray.map((item, index) => {
               return <option key={index}>{index + 1}</option>;
             })}
