@@ -1,0 +1,38 @@
+@import '../src/UtilsStyles.module.scss';
+
+.Search {
+  @include displayFlex(column, center);
+
+  & > input {
+    font: inherit;
+    width: 250px;
+    height: 25px;
+    border: 2px solid $color_search;
+
+    @media only screen and (max-width: $media_max_width) {
+      width: auto;
+      height: auto;
+    }
+
+    @media only screen and (max-width: $media_max_width_smaller) {
+      width: 110px;
+      height: auto;
+    }
+  }
+
+  & > div {
+    @include displayFlex(row, flex-end);
+
+    & > button {
+      font: inherit;
+      height: 30px;
+      margin-top: $px_small;
+      width: $px_xxlarge;
+      border-radius: $px_large;
+      border: none;
+      background: $color_search;
+      position: relative;
+      overflow: hidden;
+    }
+  }
+}

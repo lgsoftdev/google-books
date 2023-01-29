@@ -1,0 +1,15 @@
+@import '../src/UtilsStyles.module.scss';
+
+.Heading {
+  color: $color_light;
+  font-family: 'Courgette', sans-serif;
+  font-size: xx-large;
+  text-align: center;
+
+  //SOURCE: https://codepen.io/hankh/pen/XdmWOz
+  display: inline;
+  background-image: linear-gradient(to right, firebrick, $color_highlight);
+  background-size: 100% 15%;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}

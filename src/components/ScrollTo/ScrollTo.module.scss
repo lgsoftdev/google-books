@@ -1,0 +1,17 @@
+@import '../src/UtilsStyles.module.scss';
+
+.ScrollTo {
+  @include displayFlex(row, flex-end);
+  margin-right: $px_medium;
+  padding: $px_medium 0 $px_medium 0;
+
+  & > a {
+    color: $color_light;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: $media_max_width) {
+    padding: 0 0 $px_medium 0;
+  }
+}

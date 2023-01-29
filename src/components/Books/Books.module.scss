@@ -1,0 +1,9 @@
+@import '../src/UtilsStyles.module.scss';
+
+.Books {
+  @include displayFlex(column, center, center);
+}
+
+.warning {
+  color: $color_highlight;
+}

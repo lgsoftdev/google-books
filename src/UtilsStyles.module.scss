@@ -1,0 +1,34 @@
+$media_max_width: 600px;
+$media_max_width_smaller: 300px;
+
+$color_search: #a7c957;
+$color_highlight: darkorange;
+$color_app: #576f72;
+$color_light: #f3f3f3;
+$color_shadow: rgba(0, 0, 0, 0.5);
+$color_modal: #f4ead5;
+
+//margins and paddings
+$px_xsmall: 5px;
+$px_small: 10px;
+$px_medium: 20px;
+$px_large: 50px;
+$px_xxlarge: 100px;
+
+@mixin displayFlex($direction, $justify, $align_items: '') {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  @if ($align_items != '') {
+    align-items: $align_items;
+  }
+}
+
+@mixin displayGrid($columns) {
+  display: grid;
+  grid-template-columns: $columns;
+}
+
+.element_hide {
+  display: none;
+}

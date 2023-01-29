@@ -1,0 +1,48 @@
+@import '../src/UtilsStyles.module.scss';
+
+.Modal {
+  background-color: $color_modal;
+  padding: $px_xsmall $px_medium $px_medium $px_medium;
+
+  border: 1px solid $color_modal;
+  box-shadow: 5px 4px 4px rgba(0, 0, 0, 0.5);
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -300px;
+  margin-left: -300px;
+  width: 600px;
+  max-height: 600px;
+  overflow: auto;
+
+  @media only screen and (max-width: $media_max_width) {
+    margin-top: -220px;
+    margin-left: -170px;
+    width: 300px;
+    height: 500px;
+  }
+
+  @media only screen and (max-width: $media_max_width_smaller) {
+    margin-top: -220px;
+    margin-left: -130px;
+    width: 220px;
+    height: 450px;
+  }
+
+  &__header {
+    @include displayFlex(row, space-between);
+  }
+}
+
+.grid_col2 {
+  @include displayGrid(2fr 1fr);
+
+  @media only screen and (max-width: $media_max_width) {
+    @include displayGrid(1fr auto);
+
+    & img {
+      margin-left: 5px;
+    }
+  }
+}

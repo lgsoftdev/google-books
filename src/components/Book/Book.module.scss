@@ -1,0 +1,57 @@
+@import '../src/UtilsStyles.module.scss';
+
+.Book {
+  @include displayGrid(200px 1fr);
+  width: 90%;
+  height: 200px;
+  background-color: $color_light;
+  margin: $px_medium $px_medium 0 $px_medium;
+  padding: $px_medium $px_medium $px_medium 0;
+  border-radius: $px_medium;
+  overflow: hidden;
+  box-shadow: 4px 2px 2px $color_shadow;
+
+  & > figure > a > img {
+    max-height: 150px;
+    box-shadow: 0 0 10px $color_shadow;
+  }
+
+  & > figure > a:hover > img {
+    transform: scale(1.3);
+  }
+
+  @media only screen and (max-width: $media_max_width) {
+    @include displayFlex(column, flex-start);
+    width: 75%;
+    margin: $px_xsmall $px_small $px_medium $px_small;
+    padding: 0 $px_medium $px_medium $px_medium;
+    height: 360px;
+    align-items: center;
+
+    & > figure > img {
+      max-height: $px_xxlarge;
+    }
+
+    & > div > h3 {
+      font-size: medium;
+    }
+  }
+}
+
+a {
+  color: black;
+  &:hover {
+    color: $color_highlight;
+  }
+}
+
+.truncate_overflow {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  @media only screen and (max-width: $media_max_width) {
+    -webkit-line-clamp: 3;
+  }
+}

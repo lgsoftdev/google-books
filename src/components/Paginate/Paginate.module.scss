@@ -1,0 +1,10 @@
+@import '../src/UtilsStyles.module.scss';
+
+.Paginate {
+  margin-left: $px_small;
+  & select {
+    font: inherit;
+    height: 25px;
+    margin-left: $px_small;
+  }
+}
