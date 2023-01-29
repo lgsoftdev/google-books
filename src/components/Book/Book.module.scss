@@ -1,8 +1,7 @@
 @import '../src/UtilsStyles.module.scss';
 
 .Book {
-  display: grid;
-  grid-template-columns: 200px 1fr;
+  @include displayGrid(200px 1fr);
   width: 90%;
   height: 200px;
   background-color: $color_light;
