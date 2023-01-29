@@ -1,4 +1,5 @@
 import styles from './Book.module.scss';
+import imgTransparent from '../../assets/transparent.png';
 import Modal from '../Modal/Modal';
 import ReactDOM from 'react-dom/client';
 import { useRef } from 'react';
@@ -25,7 +26,13 @@ const Book = ({ volumeInfo }) => {
     <article className={styles.Book}>
       <figure>
         <a onClick={handleModalOpen} href="#">
-          <img src={volumeInfo.imageLinks.smallThumbnail} />
+          <img
+            src={
+              volumeInfo.imageLinks.smallThumbnail !== ''
+                ? volumeInfo.imageLinks.smallThumbnail
+                : imgTransparent
+            }
+          />
         </a>
       </figure>
       <div>

@@ -34,7 +34,7 @@ export const cleanBookDetails = (volumeInfoDetails) => {
   try {
     if (!cleanDetails.imageLinks)
       cleanDetails.imageLinks = {
-        smallThumbnail: '../src/assets/transparent.png',
+        smallThumbnail: '',
       };
 
     !cleanDetails.authors

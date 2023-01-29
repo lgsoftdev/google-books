@@ -1,4 +1,6 @@
 import styles from './Modal.module.scss';
+import imgCloseBtn from '../../assets/close-window-50.png';
+import imgTransparent from '../../assets/transparent.png';
 import { useEffect, useRef } from 'react';
 import { getFormattedDate } from '../../UtilsScripts';
 
@@ -44,7 +46,7 @@ const Modal = ({ details, onModalClose }) => {
         </div>
 
         <a onClick={handleCloseClick} href="#">
-          <img src="../../src/assets/close-window-50.png" />
+          <img src={imgCloseBtn} />
         </a>
       </header>
       <div className={styles.grid_col2}>
@@ -55,7 +57,13 @@ const Modal = ({ details, onModalClose }) => {
           <p>Categories: {details.categories}</p>
         </section>
         <section>
-          <img src={details.imageLinks.smallThumbnail} />
+          <img
+            src={
+              details.imageLinks.smallThumbnail !== ''
+                ? details.imageLinks.smallThumbnail
+                : imgTransparent
+            }
+          />
         </section>
       </div>
       <p>{details.description}</p>
