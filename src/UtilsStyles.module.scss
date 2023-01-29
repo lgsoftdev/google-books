@@ -6,6 +6,7 @@ $color_highlight: darkorange;
 $color_app: #576f72;
 $color_light: #f3f3f3;
 $color_shadow: rgba(0, 0, 0, 0.5);
+$color_modal: #f4ead5;
 
 //margins and paddings
 $px_xsmall: 5px;
@@ -26,4 +27,8 @@ $px_xxlarge: 100px;
 @mixin displayGrid($columns) {
   display: grid;
   grid-template-columns: $columns;
+}
+
+.element_hide {
+  display: none;
 }

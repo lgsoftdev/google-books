@@ -85,7 +85,7 @@ export const sortAscending = (object, sortBy) => {
 export const getFormattedDate = (date) => {
   const dateObj = new Date(date);
   try {
-    if (!dateObj.getDate()) return 'Unknown';
+    if (!dateObj) return 'Unknown';
 
     return `${dateObj.getDate()} ${
       MONTHS[dateObj.getMonth()]
@@ -93,4 +93,11 @@ export const getFormattedDate = (date) => {
   } catch (error) {
     return 'Error retrieving date';
   }
+};
+
+export const getNumberOfGroups = (itemsArray, itemsPerGroup) => {
+  const remainder = itemsArray.length % itemsPerGroup > 0 ? 1 : 0;
+  const numberOfGroups =
+    parseInt(itemsArray.length / itemsPerGroup) + remainder;
+  return numberOfGroups;
 };

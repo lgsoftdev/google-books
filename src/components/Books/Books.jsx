@@ -19,7 +19,7 @@ const Books = ({ booksList, currentPage }) => {
         })}
 
       {booksList.length === 0 && (
-        <label className={styles.warning}>No results found.</label>
+        <p className={styles.warning}>No results found.</p>
       )}
     </section>
   );

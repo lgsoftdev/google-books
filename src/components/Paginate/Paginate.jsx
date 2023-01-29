@@ -1,8 +1,8 @@
 import styles from './Paginate.module.scss';
+import { getNumberOfGroups } from '../../UtilsScripts';
 
 const Paginate = ({ itemsList, itemsPerPage, currentPage, onPageChange }) => {
-  const remainder = itemsList.length % itemsPerPage > 0 ? 1 : 0;
-  const numberOfPages = parseInt(itemsList.length / itemsPerPage) + remainder;
+  const numberOfPages = getNumberOfGroups(itemsList, itemsPerPage);
   const pagesArray = new Array(numberOfPages).fill(0);
 
   const handlePageChange = (event) => {

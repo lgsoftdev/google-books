@@ -3,12 +3,15 @@ import Heading from './components/Heading/Heading';
 import Search from './components/Search/Search';
 import Books from './components/Books/Books';
 import Paginate from './components/Paginate/Paginate';
+import ScrollTo from './components/ScrollTo/ScrollTo';
 import { useState, useRef, useEffect } from 'react';
 import { fetchData, sortAscending, ITEMS_PER_PAGE } from './UtilsScripts';
 
 const App = () => {
   const searchString = useRef('');
   const loader = useRef(undefined);
+  const mainElement = useRef(undefined);
+  const resultElement = useRef(undefined);
   const [sortedResult, setSortedResult] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -34,6 +37,7 @@ const App = () => {
   };
 
   const handleSearch = (stringToSearch) => {
+    resultElement.current.className = styles.element_hide;
     loader.current.className = styles.loader;
     searchString.current = stringToSearch;
     getBooks();
@@ -46,10 +50,15 @@ const App = () => {
 
   useEffect(() => {
     loader.current.className = '';
+    //cannot place resultElement here else ScrollTo will not be displayed
   });
 
+  if (resultElement.current !== undefined) {
+    resultElement.current.className = '';
+  }
+
   return (
-    <main className={styles.App}>
+    <main className={styles.App} ref={mainElement}>
       <header className={styles.App__section_row}>
         <Heading title="Book Hunt" />
         <Search onSearch={handleSearch} placeholder="Search books by title" />
@@ -57,24 +66,27 @@ const App = () => {
 
       <section ref={loader}></section>
 
-      {sortedResult === undefined ? (
-        <section className={styles.App__section_col}>
-          Search and browse through the list of books that match your query.
-        </section>
-      ) : (
-        <section>
-          <section className={styles.App__section_row2}>
-            <p>Search result for '{searchString.current}'.</p>
-            <Paginate
-              itemsList={sortedResult}
-              itemsPerPage={ITEMS_PER_PAGE}
-              currentPage={pageNumber}
-              onPageChange={goToPage}
-            />
+      <section ref={resultElement}>
+        {sortedResult === undefined ? (
+          <section className={styles.App__section_col}>
+            Search and browse through the list of books that match your query.
           </section>
-          <Books booksList={sortedResult} currentPage={pageNumber} />
-        </section>
-      )}
+        ) : (
+          <section>
+            <section className={styles.App__section_row2}>
+              <p>Search result for '{searchString.current}'.</p>
+              <Paginate
+                itemsList={sortedResult}
+                itemsPerPage={ITEMS_PER_PAGE}
+                currentPage={pageNumber}
+                onPageChange={goToPage}
+              />
+            </section>
+            <Books booksList={sortedResult} currentPage={pageNumber} />
+            <ScrollTo goToTop={true} containerElement={mainElement} />
+          </section>
+        )}
+      </section>
     </main>
   );
 };
