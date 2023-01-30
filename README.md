@@ -1,4 +1,4 @@
-# Project: Book Hunt (A Google Books API Search Engine)
+# Project: <a href="https://lgsoftdev.github.io/google-books/">Book Hunt (A Google Books API Search Engine)</a>
 
 ## Outline
 
