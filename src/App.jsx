@@ -8,17 +8,17 @@ import { useState, useRef, useEffect } from 'react';
 import { fetchData, sortAscending, ITEMS_PER_PAGE } from './UtilsScripts';
 
 const App = () => {
-  const searchString = useRef('');
-  const loader = useRef(undefined);
   const mainElement = useRef(undefined);
-  const resultElement = useRef(undefined);
+  const [searchString, setSearchString] = useState('');
   const [sortedResult, setSortedResult] = useState(undefined);
   const [pageNumber, setPageNumber] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getBooks = () => {
     const getData = async () => {
+      setIsLoading(true);
       const books = await fetchData(
-        `https://www.googleapis.com/books/v1/volumes?q=${searchString.current}+intitle:${searchString.current}&startIndex=0&maxResults=40`
+        `https://www.googleapis.com/books/v1/volumes?q=${searchString}+intitle:${searchString}&startIndex=0&maxResults=40`
       );
 
       let searchResult;
@@ -31,31 +31,23 @@ const App = () => {
         : (searchResult = []);
       setPageNumber(1);
       setSortedResult(sortAscending(searchResult, 'title'));
+      setIsLoading(false);
     };
 
     getData();
   };
 
   const handleSearch = (stringToSearch) => {
-    resultElement.current.className = styles.element_hide;
-    loader.current.className = styles.loader;
-    searchString.current = stringToSearch;
-    getBooks();
+    setSearchString(stringToSearch);
   };
 
   const goToPage = (page) => {
-    loader.current.className = styles.loader;
     setPageNumber(page);
   };
 
   useEffect(() => {
-    loader.current.className = '';
-    //cannot place resultElement here else ScrollTo will not be displayed
-  });
-
-  if (resultElement.current !== undefined) {
-    resultElement.current.className = '';
-  }
+    if (searchString) getBooks();
+  }, [searchString]);
 
   return (
     <main className={styles.App} ref={mainElement}>
@@ -64,29 +56,31 @@ const App = () => {
         <Search onSearch={handleSearch} placeholder="Search books by title" />
       </header>
 
-      <section ref={loader}></section>
+      {isLoading && <section className={styles.loader}></section>}
 
-      <section ref={resultElement}>
-        {sortedResult === undefined ? (
-          <section className={styles.App__section_col}>
-            Search and browse through the list of books that match your query.
-          </section>
-        ) : (
-          <section>
-            <section className={styles.App__section_row2}>
-              <p>Search result for '{searchString.current}'.</p>
-              <Paginate
-                itemsList={sortedResult}
-                itemsPerPage={ITEMS_PER_PAGE}
-                currentPage={pageNumber}
-                onPageChange={goToPage}
-              />
+      {!isLoading && (
+        <section>
+          {sortedResult === undefined ? (
+            <section className={styles.App__section_col}>
+              Search and browse through the list of books that match your query.
             </section>
-            <Books booksList={sortedResult} currentPage={pageNumber} />
-            <ScrollTo goToTop={true} containerElement={mainElement} />
-          </section>
-        )}
-      </section>
+          ) : (
+            <section>
+              <section className={styles.App__section_row2}>
+                <p>Search result for '{searchString}'.</p>
+                <Paginate
+                  itemsList={sortedResult}
+                  itemsPerPage={ITEMS_PER_PAGE}
+                  currentPage={pageNumber}
+                  onPageChange={goToPage}
+                />
+              </section>
+              <Books booksList={sortedResult} currentPage={pageNumber} />
+              <ScrollTo goToTop={true} containerElement={mainElement} />
+            </section>
+          )}
+        </section>
+      )}
     </main>
   );
 };
