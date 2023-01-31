@@ -95,6 +95,11 @@ export const getFormattedDate = (date) => {
   }
 };
 
+export const getCurrentYear = () => {
+  const dateObj = new Date();
+  return dateObj.getFullYear();
+};
+
 export const getNumberOfGroups = (itemsArray, itemsPerGroup) => {
   const remainder = itemsArray.length % itemsPerGroup > 0 ? 1 : 0;
   const numberOfGroups =

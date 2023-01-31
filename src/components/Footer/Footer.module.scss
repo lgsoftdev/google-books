@@ -1,0 +1,9 @@
+@import '../src/UtilsStyles.module.scss';
+
+.Footer {
+  @include displayFlex(column, end, end);
+  height: auto;
+  padding: 0 $px_small $px_small 0;
+  color: $color_light;
+  font-size: small;
+}
