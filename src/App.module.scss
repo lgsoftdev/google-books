@@ -1,6 +1,7 @@
 @import '../src/UtilsStyles.module.scss';
 
 .App {
+  @include displayFlex(column, space-between);
   background-color: $color_app;
   width: 80vw;
   min-height: 100vh;
