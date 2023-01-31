@@ -4,13 +4,6 @@ import { useRef, useEffect } from 'react';
 const ScrollTo = ({ goToTop, containerElement }) => {
   const goToElement = useRef(undefined);
 
-  //   const scrollUp = () => {
-  //     window.scrollTo({
-  //       top: 0,
-  //       behavior: 'smooth',
-  //     });
-  //   };
-
   const goToPosition = () => {
     window.scrollTo({
       top: goToTop ? 0 : containerElement.current.offsetHeight,
